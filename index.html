@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product App</title>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+<body>
+    
+   
+    <div id="app">
+
+       
+
+        <div class="produkt_table">
+            
+
+          <div v-for="produc in product"  >
+                          <div class="prod_card">
+                                <h1>{{ titl[produc.id].title }}</h1>
+                                <p  v-if="produc.onSale">{{ sale[produc.id].zxc }}</h1>
+                                <p v-else >{{nosale[produc.id].cxz }}</p>
+                                <a v-bind:href="produc.link"> More products like this</a>
+                                <img v-bind:src="produc.image" class="img"/>
+                                <p v-if="produc.inStock">In Stock</p>
+                                <p v-else :class="{outOfStock:!produc.inStock }"  >Out of Stock</p>
+                                <span v-if="produc.onSale">On Sale!</span>
+                              
+                                <p>{{produc.brand}}</p>
+                                <h2>SIZE</h2>
+                              <select name="zz" class="opt">
+                                <option v-for="size in sizes" >{{ size.razmer}}</option>
+                              </select>
+
+                              
+                                <div v-for="variant in produc.variants" :key="variant.variantId" 
+                                      :style="{ backgroundColor:variant.variantColor}"
+                                      @mouseover="updateProduct(variant.variantImage , produc.id)"
+                                    class="color_effect"  >
+                                
+                                      <p>ssss</p>
+                                </div>
+                          </div>
+                     <div class="cart_row">
+                          <div class="cart">
+                              <button v-on:click="addToCart"   :disabled="!produc.inStock"    :class="{ disabledButton: !produc.inStock }">Add to cart</button>
+                              <button v-on:click="minToCart">min to cart</button>
+                              <p>Cart({{ cart }})</p>
+                          </div>
+                    </div>
+           </div>
+          
+  
+        </div>
+
+
+      
+     
+
+    </div>
+
+
+<script src="script2.js"></script>
+</body>
+</html>
